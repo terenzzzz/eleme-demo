@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div style="padding-top:10px">
+    <div style="padding-top:10px;margin-bottom: 10px;">
         <van-row gutter="5">
             <van-col span="6">
                 <div class="iconBox">

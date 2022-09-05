@@ -6,6 +6,9 @@ import Layout from '@/views/Layout'
 import Home from '@/views/Home'
 import Login from '@/views/Login' 
 import NotFound from '@/views/NotFound'
+import Menu from '@/views/Menu'
+import Order from '@/views/Order'
+import Me from '@/views/Me'
 Vue.use(VueRouter)
 // 规则数组
 const routes = [
@@ -25,16 +28,38 @@ const routes = [
                     title:"首页"
                 }
             },
+            {
+                path: 'order',
+                component: Order,
+                meta: {
+                    title:"订单"
+                }
+            },
+            {
+                path: 'me',
+                component: Me,
+                meta: {
+                    title:"我的"
+                }
+            },
         ]
+    },
+    {
+        path: '/order',
+        component: Order
     },
     {
         path: '/login',
         component: Login
     },
     {
+        path: '/menu',
+        component: Menu
+    },
+    {
         path: "*",
         component: NotFound
-      }
+    }
 ]
 //生成路由对象
 const router = new VueRouter({

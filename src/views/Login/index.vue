@@ -8,7 +8,7 @@
     <van-row type="flex" justify="center" class="logo">
       <van-col span="10">
         <img src="@/assets/icon.png" alt="" width="100%">
-        <p>饿了么外卖</p>
+        <p class="title">饿了么外卖</p>
       </van-col>
     </van-row>
 
@@ -26,8 +26,6 @@
   </div>
 </template>
 <script>
-
-
 export default {
   data() {
     return {
@@ -52,7 +50,9 @@ export default {
   width: 100%;
   margin-top: 50px;
   text-align: center;
+  font-size: 26px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .van-button {

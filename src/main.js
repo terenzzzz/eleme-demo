@@ -3,14 +3,14 @@ import App from './App.vue'
 import router from "@/router"
 import "@/mobile/flexible"  //移动端适配
 import "@/styles/reset.css" //初始化样式
-import "../node_modules/bootstrap/dist/css/bootstrap.css"
+// import "../node_modules/bootstrap/dist/css/bootstrap.css"
 
 Vue.config.productionTip = false
 
 import {
   NavBar, Icon, Search, Tabbar, TabbarItem, Col, Row,
   Image as VanImage, Swipe, SwipeItem, Tab, Tabs, Cell, Form,
-  Field, Button,List 
+  Field, Button,List,Area, Picker
 } from 'vant';
 Vue.use(NavBar);
 Vue.use(Icon);
@@ -29,6 +29,8 @@ Vue.use(Form);
 Vue.use(Field);
 Vue.use(Button);
 Vue.use(List);
+Vue.use(Area);
+Vue.use(Picker)
 
 
 new Vue({
