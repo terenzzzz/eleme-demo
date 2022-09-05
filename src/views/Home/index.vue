@@ -11,7 +11,6 @@
                     </div>
                 </template>
                 <template #right>
-                    <van-icon name="shopping-cart-o" size="22" color="black" />
                     <van-icon name="comment-o" size="22" color="black" badge="99+" />
                 </template>
             </van-nav-bar>

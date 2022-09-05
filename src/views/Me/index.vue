@@ -5,7 +5,7 @@
 
         </div>
         <!-- 头部 -->
-        <van-nav-bar>
+        <van-nav-bar :border="false">
             <template #left>
                 <van-icon name="setting-o" size="18" color="black" />
             </template>
@@ -125,6 +125,14 @@ export default {
 };
 </script>
 <style scoped>
+.van-nav-bar {
+    background-color: #6dcefd;
+}
+
+.infoCard {
+    background-image: linear-gradient(#6dcefd, 50%, #d0ecfc);
+}
+
 .info {
     margin-bottom: 20px;
 }

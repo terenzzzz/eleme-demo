@@ -31,16 +31,17 @@
             <div class="manu">
                 <van-tabs v-model="active" color="#00a0f0">
                     <van-tab title="点菜">
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
-                        <SingleItem></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+                        <SingleItem @add="addFn"></SingleItem>
+
                     </van-tab>
                     <van-tab title="评价">评价</van-tab>
                     <van-tab title="商家">商家</van-tab>
@@ -48,9 +49,12 @@
             </div>
         </div>
         <div class="total">
-            <img src="@/assets/driver.png" alt="" width="60px">
+            <img src="@/assets/driver.png" alt="" width="60px" class="driver">
+            <span class="quantity">
+                <van-badge :content="quantity" color="#00a0f0" max="99" />
+            </span>
             <div class="price">
-                <p>$148</p>
+                <p>￥{{total}}</p>
                 <span>预估另需配送费￥9</span>
             </div>
             <button class="check">结算</button>
@@ -66,6 +70,8 @@ export default {
         return {
             tagList:['天天神券','五折起'],
             active: 0,
+            quantity:0,
+            total:0
         }
     },
     methods:{
@@ -73,6 +79,10 @@ export default {
             this.$router.push({
                 path:'/'
             })
+        },
+        addFn(){
+            this.quantity ++
+            this.total += 24
         }
     }
 };
@@ -188,5 +198,11 @@ export default {
     border-bottom-right-radius: 20px;
     padding: 0 20px;
     border: 1px solid #00a0f0;
+}
+
+.quantity {
+    position: absolute;
+    top: -20px;
+    left: 65px;
 }
 </style>

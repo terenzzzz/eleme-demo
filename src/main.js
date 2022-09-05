@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 import {
   NavBar, Icon, Search, Tabbar, TabbarItem, Col, Row,
   Image as VanImage, Swipe, SwipeItem, Tab, Tabs, Cell, Form,
-  Field, Button,List,Area, Picker
+  Field, Button,List,Area, Picker,Badge 
 } from 'vant';
 Vue.use(NavBar);
 Vue.use(Icon);
@@ -30,7 +30,8 @@ Vue.use(Field);
 Vue.use(Button);
 Vue.use(List);
 Vue.use(Area);
-Vue.use(Picker)
+Vue.use(Picker);
+Vue.use(Badge);
 
 
 new Vue({

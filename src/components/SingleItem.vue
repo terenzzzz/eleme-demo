@@ -1,5 +1,5 @@
 <template>
-    <div class="singleItem">
+    <div class="singleItem" @click="addBtn">
         <van-cell center title="板烧鸡腿堡">
             <template #icon>
                 <div class="foodPic">
@@ -17,7 +17,11 @@
 </template>
 <script>
 export default {
-  
+  methods:{
+    addBtn(){
+        this.$emit('add')
+    }
+  }
 };
 </script>
 <style scoped>

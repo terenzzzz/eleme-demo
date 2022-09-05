@@ -13,6 +13,7 @@
                 </template>
             </van-nav-bar>
             <!-- 订单状态 -->
+            <p class="statu-text">已完成</p>
             <div class="card">
                 <van-cell title="订单已送达，祝您用餐愉快">
                     <template #label>
@@ -113,8 +114,13 @@ export default {
     padding-bottom: 30px;
 }
 
+.top .statu-text {
+    color: white;
+    margin-left: 15px;
+}
+
 .card {
-    margin: 30px 10px;
+    margin: 10px 10px;
     border-radius: 10px;
     overflow: hidden;
 }
