@@ -1,6 +1,6 @@
 <template>
     <div class="singleOrder">
-        <van-cell value="内容">
+        <van-cell value="内容" @click="goDetail">
             <template #title>
                 <span class="title">麦当劳&麦咖啡</span>
                 <van-icon name="arrow" />
@@ -21,7 +21,14 @@
 </template>
 <script>
 export default {
-
+    methods:{
+        goDetail(){
+            console.log(1);
+            this.$router.push({
+                path:'/orderDetail'
+            })
+        }
+    }
 };
 </script>
 <style scoped>

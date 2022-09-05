@@ -9,6 +9,7 @@ import NotFound from '@/views/NotFound'
 import Menu from '@/views/Menu'
 import Order from '@/views/Order'
 import Me from '@/views/Me'
+import OrderDetail from '@/views/OrderDetail'
 Vue.use(VueRouter)
 // 规则数组
 const routes = [
@@ -25,21 +26,24 @@ const routes = [
                 path: 'home',
                 component: Home,
                 meta: {
-                    title:"首页"
+                    title: "首页",
+                    name:'home'
                 }
             },
             {
                 path: 'order',
                 component: Order,
                 meta: {
-                    title:"订单"
+                    title:"订单",
+                    name:'order'
                 }
             },
             {
                 path: 'me',
                 component: Me,
                 meta: {
-                    title:"我的"
+                    title:"我的",
+                    name:'me'
                 }
             },
         ]
@@ -55,6 +59,10 @@ const routes = [
     {
         path: '/menu',
         component: Menu
+    },
+    {
+        path: '/orderDetail',
+        component: OrderDetail
     },
     {
         path: "*",

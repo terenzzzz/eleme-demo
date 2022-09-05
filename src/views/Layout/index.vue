@@ -6,29 +6,24 @@
       <router-view></router-view>
     </div>
     <van-tabbar v-model="active">
-      <van-tabbar-item replace to="/layout/home">
+      <van-tabbar-item name="home" replace to="/layout/home">
         <template #icon>
           <img src="@/assets/icon.png" id="icon" />
         </template>
       </van-tabbar-item>
-      <van-tabbar-item icon="records" replace to="/layout/order">订单</van-tabbar-item>
-      <van-tabbar-item icon="contact" replace to="/layout/me">我的</van-tabbar-item>
+      <van-tabbar-item icon="records" name="order" replace to="/layout/order">订单</van-tabbar-item>
+      <van-tabbar-item icon="contact" name="me" replace to="/layout/me">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 <script>
 
 export default {
-  data() {
+  data() { 
       return {
-        active: 0,
-        icon: {
-          active: './assets/icon.png',
-        },
-        
+        active: this.$route.meta.name
       };
     },
-    
   };
 </script>
 

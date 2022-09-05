@@ -101,6 +101,7 @@ export default {
     position: absolute;
     top: 80px;
     left: 0;
+    box-sizing: border-box;
     width: 100%;
     background-color: white;
     border-top-left-radius: 20px;

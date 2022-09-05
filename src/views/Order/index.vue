@@ -37,7 +37,8 @@ export default {
             active: 0
         };
     },
-    components: { SingleOrder }
+    components: { SingleOrder },
+    
 };
 </script>
 <style scoped>
