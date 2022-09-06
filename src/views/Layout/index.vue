@@ -19,12 +19,12 @@
 <script>
 
 export default {
-  data() { 
-      return {
-        active: this.$route.meta.name
-      };
-    },
-  };
+  data() {
+    return {
+      active: this.$route.meta.name
+    };
+  },
+};
 </script>
 
 <style scoped>

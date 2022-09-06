@@ -1,0 +1,175 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<template>
+    <div class="orderDetail">
+        <!-- 头部 -->
+        <div class="top">
+            <!-- navbar  -->
+            <van-nav-bar left-arrow :border="false" @click-left="onClickLeft">
+                <template #left>
+                    <van-icon name="arrow-left" color="white" size="20" />
+                </template>
+                <template #title>
+                    <p class="nav-title">确认订单</p>
+                </template>
+            </van-nav-bar>
+            <!-- 订单状态 -->
+            <van-tabs type="card" color="#9bdbfd">
+                <!-- 外卖配送模块 -->
+                <van-tab title="外卖配送" class="main">
+                    <div class="card">
+                        <!-- 配送选项 -->
+                        <van-cell-group>
+                            <!-- 地址选项 -->
+                            <van-cell is-link :title="address" @click="addressShow = true" />
+                            <van-action-sheet v-model="addressShow" title="请选择收货地址" :actions="addressList"
+                                @select="addressSelect" close-on-click-action>
+                                <van-button plain type="info" size="large">新增地址</van-button>
+                            </van-action-sheet>
+                            <!-- 送达时间选项 -->
+                            <van-cell title="送达时间" value="尽快送达" />
+                            <!-- 支付方式选项 -->
+                            <van-cell is-link :title="payment" @click="paymentShow = true" />
+                            <van-action-sheet v-model="paymentShow" :actions="paymentList" @select="paymentSelect"
+                                cancel-text="取消" description="请选择支付方式">
+                            </van-action-sheet>
+                        </van-cell-group>
+                    </div>
+                    <OrderDetail></OrderDetail>
+                </van-tab>
+                <!-- 到店自取模块 -->
+                <van-tab title="到店自取" class="main">
+                    <div class="card">
+                        <!-- 配送选项 -->
+                        <van-cell-group>
+                            <!-- 地址选项 -->
+                            <van-cell title="麦当劳&麦咖啡">
+                                <template #label>
+                                    <img src="@/assets/map.jpg" alt="" width="100%">
+                                </template>
+                            </van-cell>
+                            <!-- 预留电话选项 -->
+                            <van-cell title="预留电话" value="13538991133" />
+                            <!-- 支付方式选项 -->
+                            <van-cell is-link :title="payment" @click="paymentShow = true" />
+                            <van-action-sheet v-model="paymentShow" :actions="paymentList" @select="paymentSelect"
+                                cancel-text="取消" description="请选择支付方式">
+                            </van-action-sheet>
+                        </van-cell-group>
+                    </div>
+                    <OrderDetail></OrderDetail>
+                </van-tab>
+            </van-tabs>
+            <div class="footer">
+                <div class="left">
+                    <img src="@/assets/basket.png" alt="" width="44px" class="footer-icon">
+                    <p>总计￥188</p>
+                </div>
+                <van-button type="info">去支付</van-button>
+            </div>
+        </div>
+
+    </div>
+</template>
+<script>
+
+import { Toast } from 'vant';
+import OrderDetail from '../../components/OrderDetail.vue';
+export default {
+    components: { OrderDetail },
+    data() {
+        return {
+            paymentShow: false,
+            paymentList: [{ name: '微信支付' }, { name: '支付宝支付' }, { name: '钱包支付' }, { name: '现金支付' }],
+            payment: '支付方式:',
+            addressShow: false,
+            addressList: [{ name: '战狼: 13538991133', subname: '广东省广州市增城区荔城街' }, { name: '战狼: 13538991133', subname: '广东省广州市增城区荔城街' }],
+            address: '请选择收货地址'
+        };
+    },
+    methods: {
+        onClickLeft() {
+            this.$router.push({
+                path: '/layout/order'
+            })
+        },
+        paymentSelect(item) {
+            // 默认情况下点击选项时不会自动收起
+            // 可以通过 close-on-click-action 属性开启自动收起
+            this.paymentShow = false;
+            Toast(item.name);
+            this.payment = item.name
+        },
+        onCancel() {
+            Toast('取消');
+        },
+        addressSelect(item) {
+            // 默认情况下点击选项时不会自动收起
+            // 可以通过 close-on-click-action 属性开启自动收起
+            this.paymentShow = false;
+            Toast(item.subname);
+            this.address = item.subname
+        },
+    }
+};
+</script>
+<style scoped>
+.nav-title {
+    color: white;
+}
+
+.van-nav-bar {
+    background-color: #0aafff;
+}
+
+.top {
+    background-image: linear-gradient(#0aafff, 40%, #d0ecfc);
+}
+
+.top .statu-text {
+    color: white;
+    margin-left: 15px;
+}
+
+.card {
+    margin: 10px 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.top .status .row {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #f7f8f9;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+}
+
+.footer .left {
+    display: flex;
+}
+
+.footer .left p {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.footer .footer-icon {
+    padding-left: 10px;
+}
+
+.main {
+    padding-bottom: 44px;
+}
+</style>

@@ -1,5 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
+    <!-- Manu  -->
+    <!-- v-animate-css="{ classes: 'fadeInRight', duration: 300 }" -->
     <div>
         <!-- navbar -->
         <div class="navbar">
@@ -54,10 +56,10 @@
                 <van-badge :content="quantity" color="#00a0f0" max="99" />
             </span>
             <div class="price">
-                <p>￥{{total}}</p>
+                <p>￥{{ total }}</p>
                 <span>预估另需配送费￥9</span>
             </div>
-            <button class="check">结算</button>
+            <button class="check" @click="goCheckOut">结算</button>
         </div>
     </div>
 </template>
@@ -66,25 +68,30 @@ import Tag from '@/components/Tag.vue';
 import SingleItem from '../../components/SingleItem.vue';
 export default {
     components: { Tag, SingleItem },
-    data(){
+    data() {
         return {
-            tagList:['天天神券','五折起'],
+            tagList: ['天天神券', '五折起'],
             active: 0,
-            quantity:0,
-            total:0
+            quantity: 0,
+            total: 0
         }
     },
-    methods:{
-        backFn(){
+    methods: {
+        backFn() {
             this.$router.push({
-                path:'/'
+                path: '/'
             })
         },
-        addFn(){
-            this.quantity ++
+        addFn() {
+            this.quantity++
             this.total += 24
+        },
+        goCheckOut() {
+            this.$router.push({
+                path: '/checkOut'
+            })
         }
-    }
+    },
 };
 </script>
 <style scoped>
@@ -96,7 +103,8 @@ export default {
 .navbar {
     background: url('@/assets/store/2.png') no-repeat center;
     background-size: cover;
-    height: 100px
+    height: 100px;
+    padding-top: 15px;
 }
 
 .navbar .left {
@@ -108,8 +116,8 @@ export default {
 }
 
 .content {
-    position: absolute;
-    top: 80px;
+    position: relative;
+    top: -20px;
     left: 0;
     box-sizing: border-box;
     width: 100%;

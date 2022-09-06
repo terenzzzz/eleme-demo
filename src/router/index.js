@@ -10,6 +10,7 @@ import Menu from '@/views/Menu'
 import Order from '@/views/Order'
 import Me from '@/views/Me'
 import OrderDetail from '@/views/OrderDetail'
+import CheckOut from '@/views/CheckOut'
 Vue.use(VueRouter)
 // 规则数组
 const routes = [
@@ -50,23 +51,45 @@ const routes = [
     },
     {
         path: '/order',
-        component: Order
+        component: Order,
+        meta: {
+            name: 'order'
+        }
+    },
+    {
+        path: '/checkOut',
+        component: CheckOut,
+        meta: {
+            name: 'checkOut'
+        }
     },
     {
         path: '/login',
-        component: Login
+        component: Login,
+        meta: {
+            name: 'login'
+        }
     },
     {
         path: '/menu',
-        component: Menu
+        component: Menu,
+        meta: {
+            name: 'menu'
+        }
     },
     {
         path: '/orderDetail',
-        component: OrderDetail
+        component: OrderDetail,
+        meta: {
+            name: 'orderDetail'
+        }
     },
     {
         path: "*",
-        component: NotFound
+        component: NotFound,
+        meta: {
+            name: 'notFound'
+        }
     }
 ]
 //生成路由对象
