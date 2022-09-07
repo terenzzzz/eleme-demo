@@ -4,7 +4,8 @@
     <!-- v-animate-css="{ classes: 'fadeInRight', duration: 300 }" -->
     <div>
         <!-- navbar -->
-        <div class="navbar">
+        <div class="navbar"
+            :style="{backgroundImage: 'url(' + storeDetail.picUrl + ')',backgroundRepeat: 'no-repeat',backgroundPosition:'left center'}">
             <div class="left">
                 <van-icon name="arrow-left" @click="backFn()" />
             </div>
@@ -17,33 +18,23 @@
         </div>
         <div class="content">
             <div class="detail">
-                <p class="title">麦当劳&麦咖啡</p>
+                <p class="title">{{storeDetail.name}}</p>
                 <div class="info">
-                    <van-icon name="star-o" color="red" />4.7
-                    <span>月售3894</span>
-                    <span>配送约28分钟</span>
+                    <van-icon name="star-o" color="red" />{{storeDetail.rate}}
+                    <span>配送约{{storeDetail.distance}}</span>
                 </div>
                 <div class="tags">
                     <Tag :tagList='tagList'></Tag>
                 </div>
                 <div class="storeLogo">
-                    <img src="@/assets/store/2.png" alt="" width="100px">
+                    <img :src="storeDetail.picUrl" alt="" width="100px">
                 </div>
             </div>
             <div class="manu">
                 <van-tabs v-model="active" color="#00a0f0">
                     <van-tab title="点菜">
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-                        <SingleItem @add="addFn"></SingleItem>
-
+                        <SingleItem @add="addFn" v-for="obj in productList" :key="obj.id" :name="obj.name"
+                            :sold="obj.sold" :price="obj.price" :picUrl="obj.picUrl"></SingleItem>
                     </van-tab>
                     <van-tab title="评价">评价</van-tab>
                     <van-tab title="商家">商家</van-tab>
@@ -66,6 +57,7 @@
 <script>
 import Tag from '@/components/Tag.vue';
 import SingleItem from '../../components/SingleItem.vue';
+import { menuAPI, storeAPI } from '@/api'
 export default {
     components: { Tag, SingleItem },
     data() {
@@ -73,8 +65,21 @@ export default {
             tagList: ['天天神券', '五折起'],
             active: 0,
             quantity: 0,
-            total: 0
+            total: 0,
+            productList: [],
+            storeDetail: {}
         }
+    },
+    async created() {
+        // 请求产品列表
+        // console.log(this.$route.params.id);
+        const res = await menuAPI(this.$route.params.id)
+        // console.log(res);
+        this.productList = res.data.data
+        // 请求店铺信息
+        const res2 = await storeAPI({ id: this.$route.params.id })
+        // console.log(res2);
+        this.storeDetail = res2.data.data[0]
     },
     methods: {
         backFn() {
@@ -101,7 +106,6 @@ export default {
 }
 
 .navbar {
-    background: url('@/assets/store/2.png') no-repeat center;
     background-size: cover;
     height: 100px;
     padding-top: 15px;
@@ -135,6 +139,7 @@ export default {
 .content .detail .title {
     font-weight: bold;
     margin: 0;
+    width: 70%;
 }
 
 .content .detail .info {

@@ -1,13 +1,13 @@
 <template>
     <div class="singleItem" @click="addBtn">
-        <van-cell center title="板烧鸡腿堡">
+        <van-cell center :title="name">
             <template #icon>
                 <div class="foodPic">
-                    <img src="@/assets/food/1.png" alt="">
+                    <img :src="picUrl" alt="">
                 </div>
             </template>
             <template #label>
-                <span class="sale">月售16 </span><span class="price"> ￥24</span>
+                <span class="sale">月售{{sold}} </span><span class="price"> ￥{{price}}</span>
             </template>
             <template #default>
                 <van-icon name="add" color="#00a0f0" size="25" />
@@ -17,11 +17,17 @@
 </template>
 <script>
 export default {
-  methods:{
-    addBtn(){
-        this.$emit('add')
+    props: {
+        name: String,
+        sold: Number,
+        price: Number,
+        picUrl: String
+    },
+    methods: {
+        addBtn() {
+            this.$emit('add')
+        }
     }
-  }
 };
 </script>
 <style scoped>

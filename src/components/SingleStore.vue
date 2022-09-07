@@ -6,9 +6,8 @@
                 <img :src="pic" alt="" width="60px" height="60px" class="cover">
             </template>
             <template #label>
-                <p class="discription">{{discription}}</p>
+                <p class="discription">起送￥{{limit}} 配送费￥{{delivery}}</p>
                 <div class="tag">
-
                     <van-row>
                         <van-col span="8"><span>28减3</span></van-col>
                         <van-col span="8"><span>28减3</span></van-col>
@@ -24,12 +23,13 @@
 </template>
 <script>
 export default {
-  props:{
-    title:String,
-    value:String,
-    pic:String,
-    discription:String
-  }
+    props: {
+        title: String,
+        value: String,
+        pic: String,
+        limit: Number,
+        delivery: Number
+    }
 };
 </script>
 <style scoped>

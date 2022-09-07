@@ -2,60 +2,26 @@
 <template>
     <div style="padding-top:10px;margin-bottom: 10px;">
         <van-row gutter="5">
-            <van-col span="6">
+            <van-col span="6" v-for="obj in list" :key="obj.index">
                 <div class="iconBox">
-                    <img src="@/assets/icon/huoguo.png" alt="" width="40px">
-                    <p>火锅</p>
-                </div>
-            </van-col>
-            <van-col span="6">
-                <div class="iconBox">
-                    <img src="@/assets/icon/haixian.png" alt="" width="40px">
-                    <p>海鲜</p>
-                </div>
-            </van-col>
-            <van-col span="6">
-                <div class="iconBox">
-                    <img src="@/assets/icon/kaorou.png" alt="" width="40px">
-                    <p>烤肉</p>
-                </div>
-            </van-col>
-            <van-col span="6">
-                <div class="iconBox">
-                    <img src="@/assets/icon/tiandian.png" alt="" width="40px">
-                    <p>甜点</p>
-                </div>
-            </van-col>
-            <van-col span="6">
-                <div class="iconBox">
-                    <img src="@/assets/icon/xiaochi.png" alt="" width="40px">
-                    <p>小吃</p>
-                </div>
-            </van-col>
-            <van-col span="6">
-                <div class="iconBox">
-                    <img src="@/assets/icon/xican.png" alt="" width="40px">
-                    <p>西餐</p>
-                </div>
-            </van-col>
-            <van-col span="6">
-                <div class="iconBox">
-                    <img src="@/assets/icon/zizhucan.png" alt="" width="40px">
-                    <p>自助餐</p>
-                </div>
-            </van-col>
-            <van-col span="6">
-                <div class="iconBox">
-                    <img src="@/assets/icon/kaoyu.png" alt="" width="40px">
-                    <p>烤鱼</p>
+                    <img :src="obj.iconUrl" alt="" width="40px">
+                    <p>{{obj.iconText}}</p>
                 </div>
             </van-col>
         </van-row>
     </div>
 </template>
 <script>
+
 export default {
-   
+    props: {
+        list: []
+    },
+    data() {
+        return {
+
+        }
+    },
 };
 </script>
 <style scoped>

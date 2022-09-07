@@ -71,7 +71,7 @@ const routes = [
         }
     },
     {
-        path: '/menu',
+        path: '/menu/:id',
         component: Menu,
         meta: {
             name: 'menu'
