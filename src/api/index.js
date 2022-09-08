@@ -7,4 +7,9 @@ import { menu, store } from "./menu";
 export const menuAPI = menu
 export const storeAPI = store
 
+import { register, login, userInfo,functions } from "./user";
+export const registerAPI = register
+export const loginAPI = login
+export const userInfoAPI = userInfo
+export const functionsAPI = functions
 

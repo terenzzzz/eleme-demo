@@ -7,7 +7,7 @@
         <!-- 头部 -->
         <van-nav-bar :border="false">
             <template #left>
-                <van-icon name="setting-o" size="18" color="black" />
+                <van-icon name="setting-o" size="18" color="black" @click="goSetting" />
             </template>
             <template #right>
                 <van-icon name="comment-o" size="18" color="black" />
@@ -17,20 +17,20 @@
         <van-cell class="infoCard">
             <template #title>
                 <div class="info">
-                    <p class="name">胖哒哒</p>
-                    <span class="phone">135****1133</span>
+                    <p class="name">{{userInfo.nickName}}</p>
+                    <span class="phone">{{userInfo.phone}}</span>
                 </div>
                 <van-row>
                     <van-col span="8">
-                        <span>0.00</span>
+                        <span>{{userInfo.giftCard}}</span>
                         <p>礼品卡</p>
                     </van-col>
                     <van-col span="8">
-                        <span>0个</span>
+                        <span>{{userInfo.redPack}}个</span>
                         <p>红包</p>
                     </van-col>
                     <van-col span="8">
-                        <span>0个</span>
+                        <span>{{userInfo.voucher}}个</span>
                         <p>代金券</p>
                     </van-col>
                 </van-row>
@@ -53,12 +53,12 @@
                     <span>充值￥50送￥5</span>
                 </div>
                 <div class="option">
-                    <p>￥50</p>
-                    <span>充值￥50送￥5</span>
+                    <p>￥150</p>
+                    <span>充值￥150送￥20</span>
                 </div>
                 <div class="option">
-                    <p>￥50</p>
-                    <span>充值￥50送￥5</span>
+                    <p>￥300</p>
+                    <span>充值￥300送￥40</span>
                 </div>
             </div>
         </div>
@@ -66,62 +66,40 @@
         <div class="myFunction">
             <p class="title">我的功能</p>
             <van-row>
-                <van-col span="6">
+                <van-col span="6" v-for="obj in functionList" :key="obj.id">
                     <div class="iconBox">
-                        <van-icon name="location-o" size="25" />
-                        <p>收货地址</p>
+                        <van-icon :name="obj.iconName" size="25" />
+                        <p>{{obj.text}}</p>
                     </div>
                 </van-col>
-                <van-col span="6">
-                    <div class="iconBox">
-                        <van-icon name="service-o" size="25" />
-                        <p>客服中心</p>
-                    </div>
-                </van-col>
-                <van-col span="6">
-                    <div class="iconBox">
-                        <van-icon name="like-o" size="25" />
-                        <p>我的收藏</p>
-                    </div>
-                </van-col>
-                <van-col span="6">
-                    <div class="iconBox">
-                        <van-icon name="comment-circle-o" size="25" />
-                        <p>待评价</p>
-                    </div>
-                </van-col>
-                <van-col span="6">
-                    <div class="iconBox">
-                        <van-icon name="gift-o" size="25" />
-                        <p>积分商城</p>
-                    </div>
-                </van-col>
-                <van-col span="6">
-                    <div class="iconBox">
-                        <van-icon name="description" size="25" />
-                        <p>电子收据</p>
-                    </div>
-                </van-col>
-                <van-col span="6">
-                    <div class="iconBox">
-                        <van-icon name="credit-pay" size="25" />
-                        <p>收货地址</p>
-                    </div>
-                </van-col>
-                <van-col span="6">
-                    <div class="iconBox">
-                        <van-icon name="friends-o" size="25" />
-                        <p>代理商招募</p>
-                    </div>
-                </van-col>
-
             </van-row>
         </div>
     </div>
 </template>
 <script>
+import { userInfoAPI, functionsAPI } from '@/api'
 export default {
-
+    data() {
+        return {
+            userInfo: {},
+            functionList: []
+        }
+    },
+    async created() {
+        const res = await userInfoAPI(sessionStorage.getItem('token'))
+        this.userInfo = res.data.data
+        // console.log(res.data.data);
+        const res2 = await functionsAPI()
+        this.functionList = res2.data.data
+        console.log(res2);
+    },
+    methods: {
+        goSetting() {
+            this.$router.push({
+                path: '/setting'
+            })
+        }
+    }
 };
 </script>
 <style scoped>

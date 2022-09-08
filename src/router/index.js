@@ -11,6 +11,8 @@ import Order from '@/views/Order'
 import Me from '@/views/Me'
 import OrderDetail from '@/views/OrderDetail'
 import CheckOut from '@/views/CheckOut'
+import Register from '@/views/Register'
+import Setting from '@/views/Setting'
 Vue.use(VueRouter)
 // 规则数组
 const routes = [
@@ -71,6 +73,13 @@ const routes = [
         }
     },
     {
+        path: '/register',
+        component: Register,
+        meta: {
+            name: 'register'
+        }
+    },
+    {
         path: '/menu/:id',
         component: Menu,
         meta: {
@@ -82,6 +91,13 @@ const routes = [
         component: OrderDetail,
         meta: {
             name: 'orderDetail'
+        }
+    },
+    {
+        path: '/setting',
+        component: Setting,
+        meta: {
+            name: 'setting'
         }
     },
     {

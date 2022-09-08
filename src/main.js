@@ -40,6 +40,7 @@ Vue.use(Badge);
 Vue.use(ActionSheet);
 
 
+
 new Vue({
   router,
   render: h => h(App),
