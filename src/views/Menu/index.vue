@@ -24,17 +24,18 @@
                     <span>配送约{{storeDetail.distance}}</span>
                 </div>
                 <div class="tags">
-                    <Tag :tagList='tagList'></Tag>
+                    <van-tag plain type="danger" v-for="(obj,index) in tagList" :key="index">{{obj}}</van-tag>
                 </div>
                 <div class="storeLogo">
-                    <img :src="storeDetail.picUrl" alt="" width="100px">
+                    <img :src="storeDetail.picUrl" alt="" width="120px">
                 </div>
             </div>
             <div class="manu">
                 <van-tabs v-model="active" color="#00a0f0">
                     <van-tab title="点菜">
                         <SingleItem @add="addFn" v-for="obj in productList" :key="obj.id" :name="obj.name"
-                            :sold="obj.sold" :price="obj.price" :picUrl="obj.picUrl"></SingleItem>
+                            :sold="obj.sold" :price="obj.price" :picUrl="obj.picUrl" :discription="obj.discription">
+                        </SingleItem>
                     </van-tab>
                     <van-tab title="评价">评价</van-tab>
                     <van-tab title="商家">商家</van-tab>
@@ -55,11 +56,10 @@
     </div>
 </template>
 <script>
-import Tag from '@/components/Tag.vue';
 import SingleItem from '../../components/SingleItem.vue';
 import { menuAPI, storeAPI } from '@/api'
 export default {
-    components: { Tag, SingleItem },
+    components: { SingleItem },
     data() {
         return {
             tagList: ['天天神券', '五折起'],
@@ -217,5 +217,9 @@ export default {
     position: absolute;
     top: -20px;
     left: 65px;
+}
+
+.van-tag {
+    margin-inline: 2px;
 }
 </style>

@@ -16,14 +16,14 @@
 </template>
 <script>
 export default {
-   
+
 };
 </script>
 <style scoped>
 .swiper {
     width: 90%;
     height: 80px;
-    margin: 0 auto;
+    margin: 10px auto;
     border-radius: 10px;
     overflow: hidden;
 }

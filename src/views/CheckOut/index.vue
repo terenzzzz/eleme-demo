@@ -59,13 +59,14 @@
                     <OrderDetail></OrderDetail>
                 </van-tab>
             </van-tabs>
-            <div class="footer">
+            <!-- <div class="footer">
                 <div class="left">
                     <img src="@/assets/basket.png" alt="" width="44px" class="footer-icon">
                     <p>总计￥188</p>
                 </div>
                 <van-button type="info">去支付</van-button>
-            </div>
+            </div> -->
+            <van-submit-bar :price="3050" button-text="提交订单" button-color="#48c2fe" @submit="onSubmit" />
         </div>
 
     </div>
@@ -109,6 +110,9 @@ export default {
             Toast(item.subname);
             this.address = item.subname
         },
+        onSubmit() {
+            Toast('提交订单');
+        }
     }
 };
 </script>

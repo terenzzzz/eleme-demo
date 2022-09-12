@@ -7,13 +7,9 @@
             </template>
             <template #label>
                 <p class="discription">起送￥{{limit}} 配送费￥{{delivery}}</p>
-                <div class="tag">
-                    <van-row>
-                        <van-col span="8"><span>28减3</span></van-col>
-                        <van-col span="8"><span>28减3</span></van-col>
-                        <van-col span="8"><span>28减3</span></van-col>
-                    </van-row>
-                </div>
+                <van-tag type="danger">28减3</van-tag>
+                <van-tag type="danger">28减3</van-tag>
+                <van-tag type="danger">28减3</van-tag>
             </template>
             <template #default>
                 <span>{{value}}</span>
@@ -37,16 +33,8 @@ export default {
     margin: 0;
 }
 
-.tag {
-    display: flex;
-}
-
-.tag span {
-    border: 1px solid #ffc6c1;
-    border-radius: 5px;
-    margin: 0 2px;
-    color: red;
-    padding: 0 1px;
+.van-tag {
+    margin-inline: 2px;
 }
 
 .cover {

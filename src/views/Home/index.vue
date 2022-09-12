@@ -23,7 +23,17 @@
                 </template>
             </van-search>
         </div>
+        <!-- 跑马灯通知 -->
+        <van-notice-bar left-icon="volume-o" :scrollable="false">
+            <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
+                <van-swipe-item>足不出户，尽享人间美食。</van-swipe-item>
+                <van-swipe-item>想吃就尽管点,美食即刻送到。</van-swipe-item>
+                <van-swipe-item>你的掌上餐馆，微菜单。</van-swipe-item>
+            </van-swipe>
+        </van-notice-bar>
+        <!-- 分类模块 -->
         <Categories :list="iconList"></Categories>
+        <!-- 轮播图模块 -->
         <Swiper></Swiper>
         <van-tabs v-model="active">
             <van-tab title="点评高分">
@@ -41,10 +51,8 @@
                 </van-list>
             </van-tab>
             <van-tab title="满减优惠">
-
             </van-tab>
             <van-tab title="品牌商家">
-
             </van-tab>
         </van-tabs>
 
@@ -104,5 +112,8 @@ export default {
 };
 </script>
 <style scoped>
-
+.notice-swipe {
+    height: 30px;
+    line-height: 30px;
+}
 </style>

@@ -14,7 +14,8 @@ Vue.config.productionTip = false
 import {
   NavBar, Icon, Search, Tabbar, TabbarItem, Col, Row,
   Image as VanImage, Swipe, SwipeItem, Tab, Tabs, Cell, Form,
-  Field, Button,List,Area, Picker,Badge, CellGroup,ActionSheet
+  Field, Button, List, Area, Picker, Badge, CellGroup, ActionSheet,
+  SubmitBar, Tag, NoticeBar, Popup, Divider
 } from 'vant';
 Vue.use(NavBar);
 Vue.use(Icon);
@@ -38,7 +39,11 @@ Vue.use(Area);
 Vue.use(Picker);
 Vue.use(Badge);
 Vue.use(ActionSheet);
-
+Vue.use(SubmitBar);
+Vue.use(Tag);
+Vue.use(NoticeBar);
+Vue.use(Popup);
+Vue.use(Divider);
 
 
 new Vue({
