@@ -47,7 +47,15 @@ const routes = [
                 meta: {
                     title:"我的",
                     name:'me'
-                }
+                },
+                beforeEnter: (to, from, next) => {
+                    if (to.path === '/layout/me' && !sessionStorage.getItem('islogin')) {
+                        next('/login')
+                    } else {
+                        next()
+                    }
+                    return false
+                  },
             },
         ]
     },
@@ -70,7 +78,7 @@ const routes = [
         component: Login,
         meta: {
             name: 'login'
-        }
+        },
     },
     {
         path: '/register',
@@ -113,5 +121,7 @@ const router = new VueRouter({
   // routes: routes
   routes //routes 时固定key(传入规则数组)
 })
+
+
 
 export default router

@@ -49,6 +49,7 @@ export default {
       // console.log(res);
       if (res.data.status == 0) {
         sessionStorage.setItem('token', res.data.token)
+        sessionStorage.setItem('islogin', true)
         this.$router.push({
           path: '/layout/me'
         })

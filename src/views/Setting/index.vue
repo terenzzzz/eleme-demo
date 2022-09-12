@@ -18,10 +18,13 @@ import { Toast } from 'vant';
 export default {
     methods: {
         onClickLeft() {
-            Toast('返回');
+            this.$router.push({
+                path: '/layout/me'
+            })
         },
         logoutFn() {
             sessionStorage.removeItem('token');
+            sessionStorage.removeItem('islogin');
             Toast('账号已退出');
             this.$router.push({
                 path: '/login'
