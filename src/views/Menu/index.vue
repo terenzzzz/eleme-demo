@@ -73,11 +73,11 @@ export default {
     async created() {
         // 请求产品列表
         // console.log(this.$route.params.id);
-        const res = await menuAPI(this.$route.params.id)
+        const res = await menuAPI({ storeId: this.$route.params.id })
         // console.log(res);
         this.productList = res.data.data
         // 请求店铺信息
-        const res2 = await storeAPI({ id: this.$route.params.id })
+        const res2 = await storeAPI({ storeId: this.$route.params.id })
         // console.log(res2);
         this.storeDetail = res2.data.data[0]
     },
