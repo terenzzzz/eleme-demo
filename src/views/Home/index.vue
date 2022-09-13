@@ -87,7 +87,6 @@ export default {
         //请求店铺数据
         const res2 = await storesAPI()
         this.storeList = res2.data.data
-
     },
     methods: {
         onLoad() {

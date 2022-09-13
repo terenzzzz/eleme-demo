@@ -10,14 +10,7 @@
         <!-- 标签页 -->
         <van-tabs v-model="active" background="#f7f8f9">
             <van-tab title="全部订单">
-                <SingleOrder></SingleOrder>
-                <SingleOrder></SingleOrder>
-                <SingleOrder></SingleOrder>
-                <SingleOrder></SingleOrder>
-                <SingleOrder></SingleOrder>
-                <SingleOrder></SingleOrder>
-                <SingleOrder></SingleOrder>
-                <SingleOrder></SingleOrder>
+                <SingleOrder v-for="obj in ordersList" :key="obj.id"></SingleOrder>
             </van-tab>
             <van-tab title="待评价">
                 <SingleOrder></SingleOrder>
@@ -30,15 +23,22 @@
 </template>
 <script>
 import SingleOrder from '@/components/SingleOrder.vue';
+import { ordersAPI } from '@/api';
 export default {
     data() {
         return {
             value: "",
-            active: 0
+            active: 0,
+            ordersList: []
         };
     },
     components: { SingleOrder },
-
+    async created() {
+        // 请求订单数据
+        const res = await ordersAPI(sessionStorage.getItem('token'))
+        console.log(res);
+        this.ordersList = res.data.data
+    },
 };
 </script>
 <style scoped>
