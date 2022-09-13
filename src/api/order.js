@@ -9,3 +9,12 @@ export const orders = (params) => request({
         'Authorization': params
     }
 })
+
+// 订单页- 订单详情
+export const orderDetail = (token,params) => request({
+    url: `/my/orderDetail`,
+    headers: {
+        'Authorization': token
+    },
+    params
+})

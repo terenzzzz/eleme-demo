@@ -10,7 +10,7 @@
         <!-- 标签页 -->
         <van-tabs v-model="active" background="#f7f8f9">
             <van-tab title="全部订单">
-                <SingleOrder v-for="obj in ordersList" :key="obj.id"></SingleOrder>
+                <SingleOrder v-for="obj in ordersList" :key="obj.id" :order="obj"></SingleOrder>
             </van-tab>
             <van-tab title="待评价">
                 <SingleOrder></SingleOrder>

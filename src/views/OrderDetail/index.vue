@@ -89,15 +89,22 @@
 <script>
 import IconText from "../../components/IconText.vue";
 import OrderItem from "@/components/OrderItem.vue";
+import { orderDetail } from "@/api/order";
 export default {
     components: { IconText, OrderItem },
-    methods:{
-        onClickLeft(){
+    methods: {
+        onClickLeft() {
             this.$router.push({
-                path:'/layout/order'
+                path: '/layout/order'
             })
         }
-    }
+    },
+    async created() {
+        // 请求订单数据
+        const res = await orderDetail(sessionStorage.getItem('token'), { orderId: this.$route.params.id })
+        console.log(res);
+        // this.ordersList = res.data.data
+    },
 };
 </script>
 <style scoped>

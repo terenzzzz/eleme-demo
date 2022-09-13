@@ -1,6 +1,6 @@
 <template>
     <div class="singleOrder">
-        <van-cell value="内容" @click="goDetail">
+        <van-cell value="内容" @click="goDetail(order.id)">
             <template #title>
                 <span class="title">麦当劳&麦咖啡</span>
                 <van-icon name="arrow" />
@@ -11,8 +11,8 @@
                 <img src="@/assets/food/1.png" alt="" width="35px" class="foodPic">
             </template>
             <template #default>
-                <span>已完成</span>
-                <p class="price">￥68</p>
+                <span>{{order.status}}</span>
+                <p class="price">￥{{order.total}}</p>
                 <van-button type="default" round size="mini">再来一单</van-button>
                 <van-button type="default" round size="mini" plain color="#00a0f0">去评价</van-button>
             </template>
@@ -21,11 +21,13 @@
 </template>
 <script>
 export default {
-    methods:{
-        goDetail(){
-            console.log(1);
+    props: {
+        order: Object
+    },
+    methods: {
+        goDetail(orderId) {
             this.$router.push({
-                path:'/orderDetail'
+                path: '/orderDetail/' + orderId
             })
         }
     }
