@@ -2,7 +2,7 @@
     <div class="singleOrder">
         <van-cell value="内容" @click="goDetail(order.id)">
             <template #title>
-                <span class="title">麦当劳&麦咖啡</span>
+                <span class="title">{{store.name}}</span>
                 <van-icon name="arrow" />
             </template>
             <template #label>
@@ -11,7 +11,7 @@
                 <img src="@/assets/food/1.png" alt="" width="35px" class="foodPic">
             </template>
             <template #default>
-                <span>{{order.status}}</span>
+                <span>{{statu}}</span>
                 <p class="price">￥{{order.total}}</p>
                 <van-button type="default" round size="mini">再来一单</van-button>
                 <van-button type="default" round size="mini" plain color="#00a0f0">去评价</van-button>
@@ -20,9 +20,24 @@
     </div>
 </template>
 <script>
+import { statuAPI, storeAPI } from '@/api'
 export default {
     props: {
-        order: Object
+        order: Object,
+    },
+    data() {
+        return {
+            statu: '',
+            store: {}
+        }
+    },
+    async created() {
+        // 请求订单状态
+        const res = await statuAPI(sessionStorage.getItem('token'), this.order.status)
+        this.statu = res.data.data.statu
+        // 查询店铺详情
+        const res2 = await storeAPI({ storeId: this.order.storeId })
+        this.store = res2.data.data[0]
     },
     methods: {
         goDetail(orderId) {

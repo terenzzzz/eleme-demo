@@ -16,3 +16,7 @@ export const functionsAPI = functions
 import {orders, orderDetail} from "./order"
 export const ordersAPI = orders
 export const orderDetailAPI = orderDetail
+
+import {statu} from "./status"
+export const statuAPI = statu
+
