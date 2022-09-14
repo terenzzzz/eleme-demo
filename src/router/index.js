@@ -48,14 +48,6 @@ const routes = [
                     title:"我的",
                     name:'me'
                 },
-                beforeEnter: (to, from, next) => {
-                    if (to.path === '/layout/me' && !sessionStorage.getItem('islogin')) {
-                        next('/login')
-                    } else {
-                        next()
-                    }
-                    return false
-                  },
             },
         ]
     },
@@ -122,6 +114,20 @@ const router = new VueRouter({
   routes //routes 时固定key(传入规则数组)
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.path == '/layout/me' && !sessionStorage.getItem('islogin')){
+        return router.replace({
+            path:'/login'
+        })
+    }
+    if (to.path == '/layout/order' && !sessionStorage.getItem('islogin')){
+        return router.replace({
+            path:'/login'
+        })
+    } else {
+        next()
+    }
+})
 
 
 export default router
