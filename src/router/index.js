@@ -12,7 +12,15 @@ import Me from '@/views/Me'
 import OrderDetail from '@/views/OrderDetail'
 import CheckOut from '@/views/CheckOut'
 import Register from '@/views/Register'
-import Setting from '@/views/Setting'
+import SettingLayout from '@/views/SettingLayout'
+import SettingHome from '@/views/SettingHome'
+import SettingUser from '@/views/SettingUser/index.vue'
+import SettingUserHome from '@/views/SettingUser/home.vue'
+import SettingNickName from '@/views/SettingUser/nickName.vue'
+import SettingBirth from '@/views/SettingUser/birth.vue'
+import SettingPassword from '@/views/SettingUser/password.vue'
+import SettingEmail from '@/views/SettingUser/email.vue'
+import SettingAddress from '@/views/SettingUser/address.vue'
 Vue.use(VueRouter)
 // 规则数组
 const routes = [
@@ -94,11 +102,46 @@ const routes = [
         }
     },
     {
-        path: '/setting',
-        component: Setting,
-        meta: {
-            name: 'setting'
-        }
+        path: '/settingLayout',
+        component: SettingLayout,
+        redirect:'/settingLayout/home',
+        children: [
+            {
+                path: 'home',
+                component: SettingHome,
+            },
+            {
+                path: 'user',
+                component: SettingUser,
+                redirect:'/settingLayout/user/home',
+                children: [
+                    {
+                        path: 'home',
+                        component: SettingUserHome,
+                    },
+                    {
+                        path: 'nickName',
+                        component: SettingNickName,
+                    },
+                    {
+                        path: 'birth',
+                        component: SettingBirth,
+                    },
+                    {
+                        path: 'password',
+                        component: SettingPassword,
+                    },
+                    {
+                        path: 'email',
+                        component: SettingEmail,
+                    },
+                    {
+                        path: 'address',
+                        component: SettingAddress,
+                    },
+                ]
+            },
+        ]
     },
     {
         path: "*",

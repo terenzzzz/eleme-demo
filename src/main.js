@@ -15,7 +15,7 @@ import {
   NavBar, Icon, Search, Tabbar, TabbarItem, Col, Row,
   Image as VanImage, Swipe, SwipeItem, Tab, Tabs, Cell, Form,
   Field, Button, List, Area, Picker, Badge, CellGroup, ActionSheet,
-  SubmitBar, Tag, NoticeBar, Popup, Divider
+  SubmitBar, Tag, NoticeBar, Popup, Divider, DatetimePicker,AddressList
 } from 'vant';
 Vue.use(NavBar);
 Vue.use(Icon);
@@ -44,7 +44,8 @@ Vue.use(Tag);
 Vue.use(NoticeBar);
 Vue.use(Popup);
 Vue.use(Divider);
-
+Vue.use(DatetimePicker);
+Vue.use(AddressList);
 
 new Vue({
   router,

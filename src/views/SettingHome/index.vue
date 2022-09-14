@@ -3,7 +3,7 @@
     <div>
         <van-nav-bar title="设置" left-arrow @click-left="onClickLeft" />
         <van-cell-group>
-            <van-cell title="个人资料" is-link />
+            <van-cell title="个人资料" is-link to="/settingLayout/user" />
             <van-cell title="账号于安全" is-link />
         </van-cell-group>
         <van-cell-group>

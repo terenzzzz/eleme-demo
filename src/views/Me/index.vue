@@ -96,7 +96,7 @@ export default {
     methods: {
         goSetting() {
             this.$router.push({
-                path: '/setting'
+                path: '/settingLayout'
             })
         }
     }
