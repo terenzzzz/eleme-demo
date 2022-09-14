@@ -116,12 +116,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.path == '/layout/me' && !sessionStorage.getItem('islogin')){
-        return router.replace({
+        return router.push({
             path:'/login'
         })
     }
     if (to.path == '/layout/order' && !sessionStorage.getItem('islogin')){
-        return router.replace({
+        return router.push({
             path:'/login'
         })
     } else {

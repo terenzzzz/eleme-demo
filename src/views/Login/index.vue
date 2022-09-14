@@ -50,18 +50,14 @@ export default {
       if (res.data.status == 0) {
         sessionStorage.setItem('token', res.data.token)
         sessionStorage.setItem('islogin', true)
-        this.$router.push({
-          path: '/layout/me'
-        })
-        return Toast('登录成功');
+        this.$router.go(-1)
+        return Toast('登录成功')
       } else {
-        return Toast('手机号或密码错误！请重试');
+        return Toast('手机号或密码错误！请重试')
       }
     },
     onClickLeft() {
-      this.$router.push({
-        path: "/layout/home"
-      })
+      this.$router.go(-1)
     },
     phoneValidator(val) {
       return /^1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9[0-35-9])\d{8}$/.test(val);

@@ -18,9 +18,7 @@ import { Toast } from 'vant';
 export default {
     methods: {
         onClickLeft() {
-            this.$router.push({
-                path: '/layout/me'
-            })
+            this.$router.go(-1)
         },
         logoutFn() {
             sessionStorage.removeItem('token');
