@@ -13,8 +13,9 @@ export const loginAPI = login
 export const userInfoAPI = userInfo
 export const functionsAPI = functions
 
-import {orders, orderDetail} from "./order"
+import {orders, order, orderDetail} from "./order"
 export const ordersAPI = orders
+export const orderAPI = order
 export const orderDetailAPI = orderDetail
 
 import {statu} from "./status"
