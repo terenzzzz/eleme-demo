@@ -126,18 +126,22 @@ const routes = [
                     },
                     {
                         path: 'birth',
+                        name:'birth',
                         component: SettingBirth,
                     },
                     {
                         path: 'password',
+                        name:'password',
                         component: SettingPassword,
                     },
                     {
                         path: 'email',
+                        name:'email',
                         component: SettingEmail,
                     },
                     {
                         path: 'address',
+                        name:'address',
                         component: SettingAddress,
                     },
                 ]

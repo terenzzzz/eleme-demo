@@ -12,7 +12,7 @@ import { nickNameAPI } from '@/api'
 export default {
     data() {
         return {
-            value: this.$route.params.nickName,
+            value: this.$route.params.nickName
         };
     },
     methods: {

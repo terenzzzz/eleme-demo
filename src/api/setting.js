@@ -19,7 +19,7 @@ export const birth = (token,birth) => request({
     headers: {
         'Authorization': token
     },
-    data:{birth:birth}
+    data:birth
 })
 
 // 设置页面 - 修改邮箱
@@ -29,7 +29,7 @@ export const email = (token,email) => request({
     headers: {
         'Authorization': token
     },
-    data:{email:email}
+    data:email
 })
 
 // 设置页面 - 修改密码

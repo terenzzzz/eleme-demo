@@ -12,12 +12,30 @@
 <script>
 import { Toast } from 'vant';
 import moment from 'moment'
+import { birthAPI } from '@/api'
 export default {
+    data() {
+        return {
+            isShow: false,
+            date: this.$route.params.birth,
+            currentDate: new Date(this.$route.params.birth),
+            minDate: new Date(1922, 0, 1),
+            maxDate: new Date(),
+        };
+    },
     methods: {
         onClickLeft() {
             this.$router.go(-1)
         },
-        submitFn() {
+        async submitFn() {
+            // 以application/x-www-form-urlencoded格式发送数据
+            const params = new URLSearchParams();
+            params.append('birth', this.date);
+            const res = await birthAPI(sessionStorage.getItem('token'), params)
+            console.log(res);
+            if (res.data.status != 0) {
+                return Toast('修改失败')
+            }
             this.$router.go(-1)
             return Toast('修改成功')
         },
@@ -28,15 +46,7 @@ export default {
             this.isShow = false
         }
     },
-    data() {
-        return {
-            isShow: false,
-            date: '2000-01-01',
-            currentDate: new Date(2021, 0, 17),
-            minDate: new Date(1922, 0, 1),
-            maxDate: new Date(),
-        };
-    },
+
 };
 </script>
 <style scoped>

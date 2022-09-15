@@ -8,7 +8,7 @@
         <van-cell-group>
             <van-cell title="昵称" is-link :value="userInfo.nickName"
                 :to="{ name: 'nickName', params: { nickName: userInfo.nickName }}" />
-            <van-cell title="生日" is-link :value="userInfo.birth" to='/settingLayout/user/birth' />
+            <van-cell title="生日" is-link :value="birth" :to="{ name: 'birth', params: { birth: birth }}" />
         </van-cell-group>
         <van-cell-group>
             <van-cell title="手机号" :value="userInfo.phone" />
@@ -22,10 +22,12 @@
 <script>
 import { userInfoAPI } from '@/api'
 import { Toast } from 'vant';
+import moment from 'moment'
 export default {
     data() {
         return {
-            userInfo: {}
+            userInfo: {},
+            birth: ''
         }
     },
     methods: {
@@ -42,6 +44,7 @@ export default {
             return Toast('登录已过期,请重新登录');
         } else {
             this.userInfo = res.data.data
+            this.birth = moment(this.userInfo.birth).format('YYYY-MM-DD')
         }
     }
 };
