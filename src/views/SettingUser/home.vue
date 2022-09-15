@@ -13,7 +13,8 @@
         <van-cell-group>
             <van-cell title="手机号" :value="userInfo.phone" />
             <van-cell title="密码" is-link value="********" to='/settingLayout/user/password' />
-            <van-cell title="邮箱" is-link :value="userInfo.email" to='/settingLayout/user/email' />
+            <van-cell title="邮箱" is-link :value="userInfo.email"
+                :to="{ name: 'email', params: { email: userInfo.email }}" />
         </van-cell-group>
         <van-cell title="地址" is-link to='/settingLayout/user/address' />
 

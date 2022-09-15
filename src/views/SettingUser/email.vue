@@ -9,7 +9,13 @@
 </template>
 <script>
 import { Toast } from 'vant';
+import { emailAPI } from '@/api'
 export default {
+    data() {
+        return {
+            value: this.$route.params.email,
+        };
+    },
     methods: {
         onClickLeft() {
             this.$router.go(-1)
@@ -17,17 +23,20 @@ export default {
         clearFn() {
             this.value = ''
         },
-        submitFn() {
+        async submitFn() {
+            // 以application/x-www-form-urlencoded格式发送数据
+            const params = new URLSearchParams();
+            params.append('email', this.value);
+            const res = await emailAPI(sessionStorage.getItem('token'), params)
+            if (res.data.status != 0) {
+                return Toast('请输入正确的邮箱号')
+            }
             this.$router.go(-1)
             return Toast('修改成功')
-        }
-    },
-    data() {
-        return {
-            value: '',
-        };
+        },
     },
 };
 </script>
-<style lang='' scoped>
+<style scoped>
+
 </style>
