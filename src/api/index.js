@@ -21,3 +21,9 @@ export const orderDetailAPI = orderDetail
 import {statu} from "./status"
 export const statuAPI = statu
 
+import {nickName,birth,email,password} from "./setting"
+export const nickNameAPI = nickName
+export const birthAPI = birth
+export const emailAPI = email
+export const passwordAPI = password
+

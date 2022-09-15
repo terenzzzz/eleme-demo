@@ -78,6 +78,7 @@
 </template>
 <script>
 import { userInfoAPI, functionsAPI } from '@/api'
+import { Toast } from 'vant';
 export default {
     data() {
         return {
@@ -87,11 +88,18 @@ export default {
     },
     async created() {
         const res = await userInfoAPI(sessionStorage.getItem('token'))
-        this.userInfo = res.data.data
-        // console.log(res.data.data);
-        const res2 = await functionsAPI()
-        this.functionList = res2.data.data
-        console.log(res2);
+        if (res.data.status == 401) {
+            this.$router.push({
+                path: '/'
+            })
+            return Toast('登录已过期,请重新登录');
+        } else {
+            this.userInfo = res.data.data
+            // console.log(res.data.data);
+            const res2 = await functionsAPI()
+            this.functionList = res2.data.data
+            // console.log(res2);
+        }
     },
     methods: {
         goSetting() {

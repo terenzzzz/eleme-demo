@@ -121,6 +121,7 @@ const routes = [
                     },
                     {
                         path: 'nickName',
+                        name:'nickName',
                         component: SettingNickName,
                     },
                     {

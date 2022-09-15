@@ -8,7 +8,13 @@
 </template>
 <script>
 import { Toast } from 'vant';
+import { nickNameAPI } from '@/api'
 export default {
+    data() {
+        return {
+            value: this.$route.params.nickName,
+        };
+    },
     methods: {
         onClickLeft() {
             this.$router.go(-1)
@@ -16,15 +22,17 @@ export default {
         clearFn() {
             this.value = ''
         },
-        submitFn() {
+        async submitFn() {
+            // 以application/x-www-form-urlencoded格式发送数据
+            const params = new URLSearchParams();
+            params.append('nickName', this.value);
+            const res = await nickNameAPI(sessionStorage.getItem('token'), params)
+            if (res.data.status != 0) {
+                return Toast('请正确输入4-8个字符')
+            }
             this.$router.go(-1)
             return Toast('修改成功')
         }
-    },
-    data() {
-        return {
-            value: '',
-        };
     },
 };
 </script>
