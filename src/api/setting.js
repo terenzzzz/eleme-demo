@@ -33,14 +33,11 @@ export const email = (token,email) => request({
 })
 
 // 设置页面 - 修改密码
-export const password = (token,oldPwd,newPwd) => request({
+export const password = (token,params) => request({
     url: `/my/editPassword`,
     method:"POST",
     headers: {
         'Authorization': token
     },
-    data: {
-        oldPwd: oldPwd,
-        newPwd: newPwd
-    }
+    data: params
 })
