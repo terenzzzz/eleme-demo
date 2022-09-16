@@ -4,24 +4,26 @@
         <div class="detail">
             <!-- 已下单列表 -->
             <div class="foodList">
-                <p class="title">麦当劳&麦咖啡</p>
-                <OrderItem></OrderItem>
-                <OrderItem></OrderItem>
-                <OrderItem></OrderItem>
-                <OrderItem></OrderItem>
-                <OrderItem></OrderItem>
+                <p class="title">{{store.name}}</p>
+                <OrderItem v-for="(obj,index) in cart" :key="index" :productId="obj.product" :num="obj.num"></OrderItem>
             </div>
             <!-- 费用详情 -->
             <div class="fee">
                 <van-cell-group>
-                    <van-cell title="平台服务费" value="￥5.88" :border="false" />
-                    <van-cell title="打包费" value="￥1.00" :border="false" />
-                    <van-cell title="配送费" value="￥8" :border="false" />
+                    <van-cell title="平台服务费" value="1" :border="false">
+                        <template #default><span>￥</span>{{service}}</template>
+                    </van-cell>
+                    <van-cell title="打包费" :border="false">
+                        <template #default><span>￥</span>{{currency(cart.length)}}</template>
+                    </van-cell>
+                    <van-cell title="配送费" :border="false">
+                        <template #default><span>￥</span>{{currency(store.delivery)}}</template>
+                    </van-cell>
                 </van-cell-group>
             </div>
             <!-- 总计 -->
             <div class="total">
-                <p>总计 ￥68</p>
+                <p>总计 ￥{{total}}</p>
             </div>
             <!-- 备注 -->
             <van-cell-group>
@@ -32,19 +34,37 @@
     </div>
 </template>
 <script>
+import currency from 'currency.js';
 import OrderItem from './OrderItem.vue';
 // import { orderDetailAPI } from '@/api'
+
 export default {
+    props: {
+        store: Object
+    },
     data() {
-        return {}
+        return {
+            cart: JSON.parse(sessionStorage.getItem('cart'))
+        }
     },
     components: { OrderItem },
-    async created() {
-        console.log(this.$router.path);
-        // 请求订单状态
-        // const res = await orderDetailAPI(sessionStorage.getItem('token'), )
-        // this.statu = res.data.data.statu
-    },
+    computed: {
+        productTotal() {
+            let total = 0
+            this.cart.forEach((v) => {
+                total = total + v.price
+            });
+            return currency(total)
+        },
+        service() {
+            return currency(parseFloat(this.productTotal) * 0.1)
+        },
+        total() {
+            let total = parseFloat(this.service) + this.cart.length + this.store.delivery
+            return currency(total + parseFloat(this.productTotal))
+        }
+
+    }
 };
 </script>
 <style  scoped>
@@ -80,5 +100,6 @@ export default {
     padding-bottom: 10px;
     padding-top: 10px;
     font-size: 16px;
+    color: red;
 }
 </style>

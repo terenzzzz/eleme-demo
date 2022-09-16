@@ -34,7 +34,7 @@
                             </van-action-sheet>
                         </van-cell-group>
                     </div>
-                    <OrderDetail></OrderDetail>
+                    <OrderDetail :store="this.store"></OrderDetail>
                 </van-tab>
                 <!-- 到店自取模块 -->
                 <van-tab title="到店自取" class="main">
@@ -59,7 +59,7 @@
                     <OrderDetail></OrderDetail>
                 </van-tab>
             </van-tabs>
-            <van-submit-bar :price="3050" button-text="提交订单" button-color="#48c2fe" @submit="onSubmit" />
+            <van-submit-bar button-text="提交订单" button-color="#48c2fe" @submit="onSubmit" />
         </div>
 
     </div>
@@ -68,6 +68,7 @@
 
 import { Toast } from 'vant';
 import OrderDetail from '../../components/OrderDetail.vue';
+import { storeAPI } from '@/api';
 export default {
     components: { OrderDetail },
     data() {
@@ -77,14 +78,15 @@ export default {
             payment: '支付方式:',
             addressShow: false,
             addressList: [{ name: '战狼: 13538991133', subname: '广东省广州市增城区荔城街' }, { name: '战狼: 13538991133', subname: '广东省广州市增城区荔城街' }],
-            address: '请选择收货地址'
+            address: '请选择收货地址',
+            cart: JSON.parse(sessionStorage.getItem('cart')),
+            storeId: this.$route.params.storeId,
+            store: {}
         };
     },
     methods: {
         onClickLeft() {
-            this.$router.push({
-                path: '/layout/order'
-            })
+            this.$router.go(-1)
         },
         paymentSelect(item) {
             // 默认情况下点击选项时不会自动收起
@@ -106,6 +108,11 @@ export default {
         onSubmit() {
             Toast('提交订单');
         }
+    },
+    async created() {
+        const res = await storeAPI({ storeId: this.storeId })
+        this.store = res.data.data[0]
+        console.log(res);
     }
 };
 </script>
@@ -168,5 +175,43 @@ export default {
 
 .main {
     padding-bottom: 44px;
+}
+
+
+
+
+.detail {
+    background-color: white;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 0 5px 15px;
+}
+
+.detail .fee {
+    margin-top: 10px;
+    border-top: 1px solid #f7f8f9;
+}
+
+.detail .fee .feeItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    font-size: 14px;
+}
+
+.detail .total {
+    text-align: end;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 16px;
+    color: red;
 }
 </style>

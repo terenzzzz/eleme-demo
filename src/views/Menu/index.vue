@@ -33,8 +33,9 @@
             <div class="manu">
                 <van-tabs v-model="active" color="#00a0f0">
                     <van-tab title="点菜">
-                        <SingleItem @add="addFn" v-for="obj in productList" :key="obj.id" :name="obj.name"
-                            :sold="obj.sold" :price="obj.price" :picUrl="obj.picUrl" :discription="obj.discription">
+                        <SingleItem @add="addFn(obj.id,obj.price)" v-for="obj in productList" :key="obj.id"
+                            :name="obj.name" :sold="obj.sold" :price="obj.price" :picUrl="obj.picUrl"
+                            :discription="obj.discription">
                         </SingleItem>
                     </van-tab>
                     <van-tab title="评价">评价</van-tab>
@@ -67,7 +68,8 @@ export default {
             quantity: 0,
             total: 0,
             productList: [],
-            storeDetail: {}
+            storeDetail: {},
+            cart: []
         }
     },
     async created() {
@@ -87,13 +89,30 @@ export default {
                 path: '/'
             })
         },
-        addFn() {
+        addFn(productId, price) {
+            // 如果已经有就数量加1 如果没有就添加一个产品
+            const index = this.cart.findIndex(item => {
+                return item.product == productId
+            })
+            if (index == -1) {
+                this.cart.push({
+                    'product': productId,
+                    'num': 1,
+                    'price': price,
+                })
+            } else {
+                this.cart[index].num++,
+                    this.cart[index].price = this.cart[index].price + price
+            }
             this.quantity++
-            this.total += 24
+            this.total += price
+            // console.log(this.cart);
         },
         goCheckOut() {
+            sessionStorage.setItem('cart', JSON.stringify(this.cart))
             this.$router.push({
-                path: '/checkOut'
+                name: 'checkOut',
+                params: { 'storeId': this.$route.params.id }
             })
         }
     },

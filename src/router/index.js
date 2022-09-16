@@ -68,6 +68,7 @@ const routes = [
     },
     {
         path: '/checkOut',
+        name: 'checkOut',
         component: CheckOut,
         meta: {
             name: 'checkOut'
