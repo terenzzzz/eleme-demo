@@ -13,7 +13,7 @@
                 </template>
             </van-nav-bar>
             <!-- 订单状态 -->
-            <p class="statu-text">已完成</p>
+            <p class="statu-text">{{statu}}</p>
             <div class="card">
                 <van-cell title="订单已送达，祝您用餐愉快">
                     <template #label>
@@ -56,40 +56,51 @@
         <div class="detail">
             <!-- 已下单列表 -->
             <div class="foodList">
-                <p class="title">麦当劳&麦咖啡</p>
-                <OrderItem></OrderItem>
-                <OrderItem></OrderItem>
-                <OrderItem></OrderItem>
-                <OrderItem></OrderItem>
+                <p class="title">{{store.name}}</p>
+                <OrderItem v-for="(obj,index) in productList" :key="index" :productId="obj.productId" :num="obj.num">
+                </OrderItem>
             </div>
             <!-- 费用详情 -->
             <div class="fee">
-                <van-cell title="平台服务费" value="￥5.88" :border="false" />
-                <van-cell title="打包费" value="￥1.00" :border="false" />
-                <van-cell title="配送费" value="￥8" :border="false" />
+                <van-cell title="平台服务费" :border="false">
+                    <template #default>
+                        <span>￥{{currency(service)}}</span>
+                    </template>
+                </van-cell>
+                <van-cell title="打包费" value="￥1.00" :border="false">
+                    <template #default>
+                        <span>￥{{currency(productList.length)}}</span>
+                    </template>
+                </van-cell>
+                <van-cell title="配送费" :border="false">
+                    <template #default>
+                        <span>￥{{currency(order.postage)}}</span>
+                    </template>
+                </van-cell>
+
             </div>
             <!-- 总计 -->
             <div class="total">
-                <p>总计 ￥68</p>
+                <p>总计 ￥{{currency(order.total)}}</p>
             </div>
         </div>
         <!-- 收货信息 -->
         <div class="address">
             <p class="title">收货信息</p>
             <van-cell title="期望时间" value="尽快送达" :border="false" />
-            <van-cell title="收件人" value="胖哒哒" :border="false" />
-            <van-cell title="联系电话" value="13538991133" :border="false" />
+            <van-cell title="收件人" :value="buyer.nickName" :border="false" />
+            <van-cell title="联系电话" :value="buyer.phone" :border="false" />
             <van-cell title="地址" value="广州" :border="false" />
             <van-cell title="备注" value="微辣" :border="false" />
             <van-cell title="支付方式" value="在线支付" :border="false" />
-            <van-cell title="下单时间" value="2022-09-05 12：00" :border="false" />
+            <van-cell title="下单时间" :value="moment(order.createTime,'YYYY-MM-DD HH:MM:SS')" :border="false" />
         </div>
     </div>
 </template>
 <script>
 import IconText from "../../components/IconText.vue";
 import OrderItem from "@/components/OrderItem.vue";
-import { orderDetail } from "@/api/order";
+import { orderAPI, orderDetailAPI, statuAPI, storeAPI, userAPI } from "@/api";
 export default {
     components: { IconText, OrderItem },
     methods: {
@@ -99,11 +110,40 @@ export default {
             })
         }
     },
+    data() {
+        return {
+            productList: [],
+            order: {},
+            store: {},
+            statu: '',
+            payment: '',
+            remark: '',
+            address: '',
+            buyer: {}
+        }
+    },
+    computed: {
+        "service"() {
+            return (this.order.total * 0.05).toFixed(2)
+        },
+    },
     async created() {
-        // 请求订单数据
-        const res = await orderDetail(sessionStorage.getItem('token'), { orderId: this.$route.params.id })
-        console.log(res);
-        // this.ordersList = res.data.data
+        // 请求订单产品数据
+        const res = await orderDetailAPI(sessionStorage.getItem('token'), { orderId: this.$route.params.id })
+        // console.log(res);
+        this.productList = res.data.data
+        // 获取订单信息
+        const res2 = await orderAPI(sessionStorage.getItem('token'), { orderId: 1 })
+        this.order = res2.data.data[0]
+        // 获取订单状态
+        const res3 = await statuAPI(sessionStorage.getItem('token'), res2.data.data[0].status)
+        this.statu = res3.data.data.statu
+        // 获取订单店铺
+        const res4 = await storeAPI({ storeId: res2.data.data[0].storeId })
+        this.store = res4.data.data[0]
+        // 获取用户联系方式
+        const res5 = await userAPI({ userId: res2.data.data[0].userId })
+        this.buyer = res5.data.data
     },
 };
 </script>

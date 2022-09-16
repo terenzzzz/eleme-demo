@@ -4,11 +4,13 @@ import router from "@/router"
 import '../node_modules/animate.css/animate.css';
 import "@/mobile/flexible"  //移动端适配
 import "@/styles/reset.css" //初始化样式
-// import "../node_modules/bootstrap/dist/css/bootstrap.css"
 import VAnimateCss from 'v-animate-css';
+import currency from 'currency.js'
+import moment from 'moment'
 
 Vue.use(VAnimateCss);
-
+Vue.prototype.currency = v =>currency(v, {symbol:'￥'})
+Vue.prototype.moment = (time,format) =>moment(time).format(format)
 Vue.config.productionTip = false
 
 import {

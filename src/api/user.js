@@ -23,6 +23,12 @@ export const userInfo = (params) => request({
     }
 })
 
+// 获取用户基本联系方式
+export const user = (params) => request({
+    url: `/api/user`,
+    params
+})
+
 //主页- 功能区
 export const functions = () => request({
     url:`/api/functions`

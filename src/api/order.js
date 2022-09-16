@@ -11,7 +11,7 @@ export const orders = (params) => request({
 })
 
 export const order = (token,params) => request({
-    url: `/my/orders`,
+    url: `/my/order`,
     headers: {
         'Authorization': token
     },

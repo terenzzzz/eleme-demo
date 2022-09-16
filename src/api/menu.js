@@ -12,3 +12,9 @@ export const store = (params) => request({
     url: `/api/store`,
     params
 })
+
+// 产品详情
+export const product = (params) => request({
+    url: `/api/product`,
+    params
+})

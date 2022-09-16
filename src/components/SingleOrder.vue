@@ -37,12 +37,13 @@ export default {
         this.statu = res.data.data.statu
         // 查询店铺详情
         const res2 = await storeAPI({ storeId: this.order.storeId })
+        // console.log(res2);
         this.store = res2.data.data[0]
     },
     methods: {
         goDetail(orderId) {
             this.$router.push({
-                path: '/orderDetail/' + orderId
+                path: '/orderDetail/' + orderId,
             })
         }
     }

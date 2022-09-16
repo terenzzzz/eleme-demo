@@ -33,8 +33,18 @@
 </template>
 <script>
 import OrderItem from './OrderItem.vue';
+// import { orderDetailAPI } from '@/api'
 export default {
-    components: { OrderItem }
+    data() {
+        return {}
+    },
+    components: { OrderItem },
+    async created() {
+        console.log(this.$router.path);
+        // 请求订单状态
+        // const res = await orderDetailAPI(sessionStorage.getItem('token'), )
+        // this.statu = res.data.data.statu
+    },
 };
 </script>
 <style  scoped>

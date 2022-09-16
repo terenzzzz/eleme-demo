@@ -3,14 +3,16 @@ import { categories, stores} from "./home";
 export const categoriesAPI = categories
 export const storesAPI = stores
 
-import { menu, store } from "./menu";
+import { menu, store, product} from "./menu";
 export const menuAPI = menu
 export const storeAPI = store
+export const productAPI = product
 
-import { register, login, userInfo,functions } from "./user";
+import { register, login, userInfo, user, functions } from "./user";
 export const registerAPI = register
 export const loginAPI = login
 export const userInfoAPI = userInfo
+export const userAPI = user
 export const functionsAPI = functions
 
 import {orders, order, orderDetail} from "./order"

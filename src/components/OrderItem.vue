@@ -1,18 +1,34 @@
 <template>
     <div>
-        <van-cell center title="板烧鸡腿堡" value="￥24">
+        <van-cell center :title="product.name">
+            <template #default>
+                <span>￥</span>{{product.price}}
+            </template>
             <template #label>
-                <p>x1</p>
+                <p>x{{num}}</p>
             </template>
             <template #icon>
-                <img src="@/assets/food/1.png" alt="" width="50px" class="foodPic">
+                <img :src="product.picUrl" alt="" width="50px" class="foodPic">
             </template>
         </van-cell>
     </div>
 </template>
 <script>
+import { productAPI } from '@/api'
 export default {
-   
+    props: {
+        productId: Number,
+        num: Number
+    },
+    data() {
+        return { product: {} }
+    },
+    async created() {
+        // 请求产品数据
+        const res = await productAPI({ productId: this.productId })
+        // console.log(res);
+        this.product = res.data.data[0]
+    },
 };
 </script>
 <style scoped>

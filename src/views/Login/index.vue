@@ -50,7 +50,10 @@ export default {
       if (res.data.status == 0) {
         sessionStorage.setItem('token', res.data.token)
         sessionStorage.setItem('islogin', true)
-        this.$router.go(-1)
+        //返回主页
+        this.$router.push({
+          path: '/'
+        })
         return Toast('登录成功')
       } else {
         return Toast('手机号或密码错误！请重试')
