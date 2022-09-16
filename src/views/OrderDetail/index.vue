@@ -130,7 +130,7 @@ export default {
     async created() {
         // 请求订单产品数据
         const res = await orderDetailAPI(sessionStorage.getItem('token'), { orderId: this.$route.params.id })
-        // console.log(res);
+        console.log(res);
         this.productList = res.data.data
         // 获取订单信息
         const res2 = await orderAPI(sessionStorage.getItem('token'), { orderId: 1 })

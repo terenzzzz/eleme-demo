@@ -2,7 +2,7 @@
     <div>
         <van-cell center :title="product.name">
             <template #default>
-                <span>￥</span>{{product.price}}
+                <span>￥</span>{{currency(product.price * num)}}
             </template>
             <template #label>
                 <p>x{{num}}</p>
