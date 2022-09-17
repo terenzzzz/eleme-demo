@@ -6,9 +6,7 @@
                 <van-icon name="arrow" />
             </template>
             <template #label>
-                <img src="@/assets/food/1.png" alt="" width="35px" class="foodPic">
-                <img src="@/assets/food/1.png" alt="" width="35px" class="foodPic">
-                <img src="@/assets/food/1.png" alt="" width="35px" class="foodPic">
+                <img v-for="(obj,index) in picList" :key="index" :src="obj" alt="" width="35px" class="foodPic">
             </template>
             <template #default>
                 <span>{{statu}}</span>
@@ -20,7 +18,7 @@
     </div>
 </template>
 <script>
-import { statuAPI, storeAPI } from '@/api'
+import { orderDetailAPI, productAPI, statuAPI, storeAPI } from '@/api'
 export default {
     props: {
         order: Object,
@@ -28,7 +26,9 @@ export default {
     data() {
         return {
             statu: '',
-            store: {}
+            store: {},
+            productList: [],
+            picList: []
         }
     },
     async created() {
@@ -39,6 +39,21 @@ export default {
         const res2 = await storeAPI({ storeId: this.order.storeId })
         // console.log(res2);
         this.store = res2.data.data[0]
+        // 请求购买的产品
+        const res3 = await orderDetailAPI(sessionStorage.getItem('token'), { orderId: this.order.id })
+        const res3Result = res3.data.data
+        // 获取对应产品信息
+        res3Result.forEach((v) => {
+            this.productList.push(v.productId)
+        })
+        // 获取对应产品照片
+        this.productList.forEach(async (v) => {
+            this.picList.push(await (await productAPI({ productId: v })).data.data[0].picUrl)
+            if (this.picList.length >= 3) {
+                this.picList = this.picList.slice(0, 3)
+            }
+        })
+
     },
     methods: {
         goDetail(orderId) {
