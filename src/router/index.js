@@ -169,6 +169,11 @@ router.beforeEach((to, from, next) => {
             path:'/login'
         })
     }
+    if (to.path == '/checkOut' && !sessionStorage.getItem('islogin')){
+        return router.push({
+            path:'/login'
+        })
+    }
     if (to.path == '/layout/order' && !sessionStorage.getItem('islogin')){
         return router.push({
             path:'/login'

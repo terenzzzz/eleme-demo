@@ -34,7 +34,39 @@
                             </van-action-sheet>
                         </van-cell-group>
                     </div>
-                    <OrderDetail :store="this.store"></OrderDetail>
+                    <!-- 订单详情 -->
+                    <div class="detail">
+                        <!-- 已下单列表 -->
+                        <div class="foodList">
+                            <p class="title">{{store.name}}</p>
+                            <OrderItem v-for="(obj,index) in cart" :key="index" :productId="obj.product" :num="obj.num">
+                            </OrderItem>
+                        </div>
+                        <!-- 费用详情 -->
+                        <div class="fee">
+                            <van-cell-group>
+                                <van-cell title="平台服务费" value="1" :border="false">
+                                    <template #default><span>￥</span>{{service}}</template>
+                                </van-cell>
+                                <van-cell title="打包费" :border="false">
+                                    <template #default><span>￥</span>{{currency(cart.length)}}</template>
+                                </van-cell>
+                                <van-cell title="配送费" :border="false">
+                                    <template #default><span>￥</span>{{currency(store.delivery)}}</template>
+                                </van-cell>
+                            </van-cell-group>
+                        </div>
+                        <!-- 总计 -->
+                        <div class="total">
+                            <p>总计 ￥{{total}}</p>
+                        </div>
+                        <!-- 备注 -->
+                        <van-cell-group>
+                            <van-cell title="订单备注" value="可备注无接触送餐" :border="false" />
+                            <van-cell title="餐具份数" value="默认一份 >" :border="false" />
+                        </van-cell-group>
+                    </div>
+
                 </van-tab>
                 <!-- 到店自取模块 -->
                 <van-tab title="到店自取" class="main">
@@ -67,10 +99,11 @@
 <script>
 
 import { Toast } from 'vant';
-import OrderDetail from '../../components/OrderDetail.vue';
+import currency from 'currency.js';
+import OrderItem from '@/components/OrderItem.vue';
 import { storeAPI } from '@/api';
 export default {
-    components: { OrderDetail },
+    components: { OrderItem },
     data() {
         return {
             paymentShow: false,
@@ -113,6 +146,22 @@ export default {
         const res = await storeAPI({ storeId: this.storeId })
         this.store = res.data.data[0]
         console.log(res);
+    },
+    computed: {
+        productTotal() {
+            let total = 0
+            this.cart.forEach((v) => {
+                total = total + v.price
+            });
+            return currency(total)
+        },
+        service() {
+            return currency(parseFloat(this.productTotal) * 0.1)
+        },
+        total() {
+            let total = parseFloat(this.service) + this.cart.length + this.store.delivery
+            return currency(total + parseFloat(this.productTotal))
+        }
     }
 };
 </script>
