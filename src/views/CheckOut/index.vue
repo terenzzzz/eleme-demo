@@ -101,7 +101,7 @@
 import { Toast } from 'vant';
 import currency from 'currency.js';
 import OrderItem from '@/components/OrderItem.vue';
-import { storeAPI } from '@/api';
+import { storeAPI, submitOrderAPI, submitOrderDetailAPI } from '@/api';
 export default {
     components: { OrderItem },
     data() {
@@ -138,8 +138,29 @@ export default {
             Toast(item.subname);
             this.address = item.subname
         },
-        onSubmit() {
-            Toast('提交订单');
+        async onSubmit() {
+            // 要以application/x-www-form-urlencoded格式发送数据
+            // 提交订单
+            const params = new URLSearchParams();
+            params.append('storeId', this.store.id);
+            params.append('total', this.total);
+            params.append('address', '1');
+            params.append('paymentType', '1');
+            params.append('status', '1');
+            params.append('service', this.service);
+            params.append('pack', this.cart.length);
+            params.append('postage', this.store.delivery);
+            const res = await submitOrderAPI(sessionStorage.getItem('token'), params)
+
+            // 提交订单产品
+            const params2 = new URLSearchParams();
+            params2.append('orderId', res.data.orderId)
+            params2.append('productList', sessionStorage.getItem('cart'))
+            await submitOrderDetailAPI(sessionStorage.getItem('token'), params2)
+            this.$router.push({
+                path: '/layout/order'
+            })
+            Toast('下单成功');
         }
     },
     async created() {

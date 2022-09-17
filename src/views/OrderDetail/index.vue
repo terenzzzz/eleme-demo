@@ -64,12 +64,12 @@
             <div class="fee">
                 <van-cell title="平台服务费" :border="false">
                     <template #default>
-                        <span>￥{{currency(service)}}</span>
+                        <span>￥{{currency(order.service)}}</span>
                     </template>
                 </van-cell>
                 <van-cell title="打包费" value="￥1.00" :border="false">
                     <template #default>
-                        <span>￥{{currency(productList.length)}}</span>
+                        <span>￥{{currency(order.pack)}}</span>
                     </template>
                 </van-cell>
                 <van-cell title="配送费" :border="false">
@@ -122,18 +122,14 @@ export default {
             buyer: {}
         }
     },
-    computed: {
-        "service"() {
-            return (this.order.total * 0.05).toFixed(2)
-        },
-    },
     async created() {
         // 请求订单产品数据
         const res = await orderDetailAPI(sessionStorage.getItem('token'), { orderId: this.$route.params.id })
-        console.log(res);
+        // console.log(res);
         this.productList = res.data.data
         // 获取订单信息
-        const res2 = await orderAPI(sessionStorage.getItem('token'), { orderId: 1 })
+        const res2 = await orderAPI(sessionStorage.getItem('token'), { orderId: this.$route.params.id })
+        console.log(res2);
         this.order = res2.data.data[0]
         // 获取订单状态
         const res3 = await statuAPI(sessionStorage.getItem('token'), res2.data.data[0].status)

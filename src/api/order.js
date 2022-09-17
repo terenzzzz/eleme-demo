@@ -26,3 +26,23 @@ export const orderDetail = (token,params) => request({
     },
     params
 })
+
+// 提交订单
+export const submitOrder = (token,params) => request({
+    url: `/my/submitOrder`,
+    method: 'post',
+    headers: {
+        'Authorization': token
+    },
+    data:params
+})
+
+// 提交订单产品
+export const submitOrderDetail = (token,params) => request({
+    url: `/my/submitOrderDetail`,
+    method: 'post',
+    headers: {
+        'Authorization': token
+    },
+    data:params
+})

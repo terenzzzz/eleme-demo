@@ -15,10 +15,12 @@ export const userInfoAPI = userInfo
 export const userAPI = user
 export const functionsAPI = functions
 
-import {orders, order, orderDetail} from "./order"
+import {orders, order, orderDetail,submitOrder,submitOrderDetail} from "./order"
 export const ordersAPI = orders
 export const orderAPI = order
 export const orderDetailAPI = orderDetail
+export const submitOrderAPI = submitOrder
+export const submitOrderDetailAPI = submitOrderDetail
 
 import {statu} from "./status"
 export const statuAPI = statu
