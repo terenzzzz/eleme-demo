@@ -1,0 +1,116 @@
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+npm ERR! path /root/eleme-demo
+npm ERR! command failed
+npm ERR! signal SIGHUP
+npm ERR! command sh -c node server.js
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-11-30T11_35_31_212Z-debug-0.log
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+npm ERR! path /root/eleme-demo
+npm ERR! command failed
+npm ERR! signal SIGHUP
+npm ERR! command sh -c node server.js
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-12-14T14_08_37_903Z-debug-0.log
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+npm ERR! path /root/eleme-demo
+npm ERR! command failed
+npm ERR! signal SIGHUP
+npm ERR! command sh -c node server.js
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-12-19T01_09_40_064Z-debug-0.log
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+npm ERR! path /root/eleme-demo
+npm ERR! command failed
+npm ERR! signal SIGHUP
+npm ERR! command sh -c node server.js
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-12-22T15_46_07_833Z-debug-0.log
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+npm ERR! path /root/eleme-demo
+npm ERR! command failed
+npm ERR! signal SIGHUP
+npm ERR! command sh -c node server.js
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-12-25T21_17_56_486Z-debug-0.log
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+npm ERR! path /root/eleme-demo
+npm ERR! command failed
+npm ERR! signal SIGHUP
+npm ERR! command sh -c node server.js
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-12-25T22_34_12_210Z-debug-0.log
+
+> element-demo@0.1.0 start
+> node server.js "app.js"
+
+5000
+Killed
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
+
+> element-demo@0.1.0 start
+> node server.js
+
+npmnpm  ERR! pathERR! /root/eleme-demo
+ path /root/eleme-demo
+npmnpm ERR! ERR! command failed
+ command failed
+npm ERR! signal SIGHUP
+npm ERR! signal SIGHUP
+npm ERR! command sh -c node server.js
+npm ERR! command sh -c node server.js
+
+
+npm ERR!npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-12-29T18_15_28_021Z-debug-0.log
+ A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-12-29T18_14_39_448Z-debug-0.log
+
+> element-demo@0.1.0 start
+> node server.js
+
+5000
